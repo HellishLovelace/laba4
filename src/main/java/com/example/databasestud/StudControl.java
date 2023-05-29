@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.example.databasestud.*;
 import com.google.gson.Gson;
 
-public class StudentController extends HttpServlet {
+public class StudControl extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentDAO studentDAO;
 
@@ -62,7 +61,7 @@ public class StudentController extends HttpServlet {
     // Отображение домашней страницы со списком
     private void showHome(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        List<Student> students = studentDAO.getAllStudents();
+        List<Stud> students = studentDAO.getAllStudents();
         request.setAttribute("students", students);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
@@ -76,7 +75,7 @@ public class StudentController extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         String subject = request.getParameter("subject");
 
-        Student student = new Student(0, name, surname, group, age, subject);
+        Stud student = new Stud(0, name, surname, group, age, subject);
         studentDAO.addStudent(student);
         response.sendRedirect("list");
     }
@@ -91,7 +90,7 @@ public class StudentController extends HttpServlet {
         int age = Integer.parseInt(request.getParameter("age"));
         String subject = request.getParameter("subject");
 
-        Student student = new Student(id, name, surname, group, age, subject);
+        Stud student = new Stud(id, name, surname, group, age, subject);
         studentDAO.updateStudent(student);
         response.sendRedirect("list");
     }
@@ -107,7 +106,7 @@ public class StudentController extends HttpServlet {
     // Получение списка записей в формате JSON
     private void listStudents(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        List<Student> students = studentDAO.getAllStudents();
+        List<Stud> students = studentDAO.getAllStudents();
         Gson gson = new Gson();
         String jsonStudents = gson.toJson(students);
         PrintWriter out = response.getWriter();

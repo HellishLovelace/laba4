@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.databasestud.Student;
-
 public class StudentDAO {
     private Connection connection;
 
@@ -16,8 +14,8 @@ public class StudentDAO {
         this.connection = connection;
     }
 
-    // Добавление записи в БД
-    public void addStudent(Student student) throws SQLException {
+    // Adding new entries
+    public void addStudent(Stud student) throws SQLException {
         PreparedStatement preparedStatement = connection
                 .prepareStatement("insert into students(name,surname,group,age,subject) values (?, ?, ?, ?, ?)");
         preparedStatement.setString(1, student.getName());
@@ -28,12 +26,12 @@ public class StudentDAO {
         preparedStatement.executeUpdate();
     }
 
-    // Получение списка записей из БД
-    public List<Student> getAllStudents() throws SQLException {
-        List<Student> students = new ArrayList<Student>();
+    // Get list of entries
+    public List<Stud> getAllStudents() throws SQLException {
+        List<Stud> students = new ArrayList<Stud>();
         ResultSet resultSet = connection.prepareStatement("select * from students").executeQuery();
         while (resultSet.next()) {
-            Student student = new Student(resultSet.getInt("id"), resultSet.getString("name"),
+            Stud student = new Stud(resultSet.getInt("id"), resultSet.getString("name"),
                     resultSet.getString("surname"), resultSet.getString("group"), resultSet.getInt("age"),
                     resultSet.getString("subject"));
             students.add(student);
@@ -41,8 +39,8 @@ public class StudentDAO {
         return students;
     }
 
-    // Обновление записи в БД
-    public void updateStudent(Student student) throws SQLException {
+    // Updating DB entry
+    public void updateStudent(Stud student) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "update students set name=?, surname=?, group=?, age=?, subject=? where id=?");
         preparedStatement.setString(1, student.getName());
@@ -54,7 +52,7 @@ public class StudentDAO {
         preparedStatement.executeUpdate();
     }
 
-    // Удаление записи из БД
+    // Deleting entries
     public void deleteStudent(int id) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("delete from students where id=?");
         preparedStatement.setInt(1, id);

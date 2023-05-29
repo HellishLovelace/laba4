@@ -7,13 +7,13 @@
     <meta charset="UTF-8">
     <title>Student List</title>
     <style>
-        /* Добавить стили для заголовков */
+        /* adding style */
 
         h2 {
             font-size: 24px;
         }
 
-        /* Добавить стили для формы */
+        /* Adding font style */
 
         form {
             margin-bottom: 20px;

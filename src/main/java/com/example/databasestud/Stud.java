@@ -1,6 +1,6 @@
 package com.example.databasestud;
 
-public class Student {
+public class Stud {
     private int id;
     private String name;
     private String surname;
@@ -8,9 +8,9 @@ public class Student {
     private int age;
     private String subject;
 
-    public Student() {}
+    public Stud() {}
 
-    public Student(int id, String name, String surname, String group, int age, String subject) {
+    public Stud(int id, String name, String surname, String group, int age, String subject) {
         this.id = id;
         this.name = name;
         this.surname = surname;
